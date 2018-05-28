@@ -1,0 +1,41 @@
+<div>
+    <div class="btn-group">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{selectedReviews}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" (click)='getGoogleReviews();'>Google Reviews</a>
+        <a class="dropdown-item" (click)='getYelpReviews();'>Yelp Reviews</a>
+      </div>
+     </div>
+    <div class="btn-group">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="sortByButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{selectedOrder}}
+        </button>
+      <div class="dropdown-menu" aria-labelledby="sortByButton">
+        <a class="dropdown-item" (click)='sortBy("Default Order");'>Default Order</a>
+        <a class="dropdown-item" (click)='sortBy("Highest Rating");'>Highest Rating</a>
+        <a class="dropdown-item" (click)='sortBy("Lowest Rating");'>Lowest Rating</a>
+        <a class="dropdown-item" (click)='sortBy("Most Recent");'>Most Recent</a>
+        <a class="dropdown-item" (click)='sortBy("Least Recent");'>Least Recent</a>
+      </div>
+    </div>
+    
+    <div *ngIf="getIfError()" class="alert alert-warning" role="alert">No reviews were found</div>
+    <div [@fadeInOutTranslate]="selectedReviews" class="container">
+        <ul *ngFor="let review of shownReviews" class="container border py-2 my-2">
+                <div width="50px"><a class="float-left" href="{{review['author_url']}}" target="_blank"><img class="img-circle" width="50px" src="{{review['profile_photo_url']}}"></a></div>
+            
+            <p style="overflow: hidden; padding-left: 10px">
+                <a href="{{review['author_url']}}" target="_blank">{{review['author_name']}}</a>
+                <br/><rating [(ngModel)]="review['rating']" [readonly]="true"></rating> {{review['time']}}
+                <br/>{{review['text']}}
+            </p>
+        </ul>
+    
+    </div>
+
+
+
+
+</div>

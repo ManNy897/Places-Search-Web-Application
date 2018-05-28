@@ -1,0 +1,41 @@
+<div>
+    <table class="table table-striped">
+        <tr *ngIf="info.address"><td class="font-weight-bold"><strong>Address</strong></td> <td>{{info['address']}}</td></tr>
+        <tr *ngIf="info.phone"><td class="font-weight-bold"><strong>Phone Number</strong></td> <td>{{info['phone']}}</td></tr>
+        <tr *ngIf="info.price_level"><td class="font-weight-bold"><strong>Price Level</strong></td> <td>{{info['price_level']}}</td></tr>
+<!--        <tr *ngIf="info.rating"><td class="font-weight-bold"><strong>Rating</strong></td> <td>{{info['rating']}}<span id='stars'></span></td></tr>-->
+        <tr *ngIf="info.rating"><td class="font-weight-bold"><strong>Rating</strong></td> <td>{{info['rating']}}<rating [ngModel]="this.info['rating']" [readonly]="true"></rating></td></tr>
+        <tr *ngIf="info.url"><td class="font-weight-bold"><strong>Google Page</strong></td> <td><a href="{{info['url']}}" target="_blank">{{info['url']}}</a></td></tr>
+        <tr *ngIf="info.website"><td class="font-weight-bold"><strong>Website</strong></td> <td><a href="{{info['website']}}" target="_blank">{{info['website']}}</a></td></tr>
+        <tr *ngIf="info.hours"><td class="font-weight-bold"><strong>Hours</strong></td> <td>{{info['hours']['message']}}      <a data-toggle="modal" data-target="#hoursModal" onMouseOver="this.style.cursor='pointer'">   Daily Open Hours</a></td></tr>
+    </table>
+</div>
+
+<div *ngIf='info.hours' class="modal fade" id="hoursModal" tabindex="-1" role="dialog" aria-labelledby="hoursModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="hoursModalLabel">Open Hours</h5>
+        <span><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button></span>
+      </div>
+      <div class="modal-body">
+        <table class='table'>
+            <tr *ngFor='let row of info.hours.list'>
+                <!-- a horrible way to impliment day bolding-->
+                <td *ngIf="row.split(': ', 2)[0] === info.hours.dayName" style='font-weight: bold'>{{row.split(': ', 2)[0]}}</td>
+                <td *ngIf="row.split(': ', 2)[0] !== info.hours.dayName">{{row.split(': ', 2)[0]}}</td>
+                
+                <td *ngIf="row.split(': ', 2)[0] === info.hours.dayName" style='font-weight: bold'>{{row.split(': ', 2)[1]}}</td>
+                <td *ngIf="row.split(': ', 2)[0] !== info.hours.dayName">{{row.split(': ', 2)[1]}}</td>
+
+            </tr>  
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

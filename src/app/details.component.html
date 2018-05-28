@@ -1,0 +1,26 @@
+<div id='map'></div>
+<!--<div *ngIf='details'>-->
+<div>
+    <h1>{{name}}</h1>
+    <a routerLink="/results"><button class="btn btn-default  btn-outline-secondary"><span class="glyphicon glyphicon-menu-left"></span>List</button></a>
+    <a id="twitter" target="_blank" class="twitter-share-button" [href]="getTwitter()"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/Twitter.png" width="30"></a>
+<!--    <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%2085C%20Bakery%20Cafe%20-%20Cupertino%20located%20at%2019459%20Stevens%20Creek%20Blvd%20#100,%20Cupertino,%20CA%2095014&url=https%3A%2F%2Fexample.com%2F"></a>-->
+<!--    https://twitter.com/intent/tweet?text=Check%20out%2085C%20Bakery%20Cafe%20-%20Cupertino%20located%20at%2019459%20Stevens%20Creek%20Blvd%20#100,%20Cupertino,%20CA%2095014,&url=http://www.85cbakerycafe.com/-->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" [routerLink]="[{ outlets: { 'details-router': ['info'] } }]">Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[{ outlets: { 'details-router': ['photos'] } }]">Photos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[{ outlets: { 'details-router': ['map'] } }]">Map</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[{ outlets: { 'details-router': ['reviews'] } }]">Reviews</a>
+      </li>
+    </ul>
+    <router-outlet name="details-router"></router-outlet>
+    
+</div>
+    

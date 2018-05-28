@@ -1,0 +1,34 @@
+<div>
+    
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col-12 col-sm">
+          <label for="fromMapInput">From</label>
+          <input id="fromMapInput" placeholder="My location" class="form-control" autocomplete="on" autocapitalize="off" spellcheck="off" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm">
+          <label for="toMapInput">To</label>
+            <input id ="toMapInput" [placeholder]="ds.details.formatted_address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control font-weight-bold" readonly>
+        </div>
+        <div class="col-12 col-sm">
+          <label for="modeMapInput">Travel Mode</label>
+          <select class="form-control " id="modeMapInput" name="category">
+                    <option value="DRIVING" checked>Driving</option>
+                    <option value="BICYCLING">Biking</option>
+                    <option value="TRANSIT">Transit</option>
+                    <option value="WALKING">Walking</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="getDirections()">Get Directions</button>
+      </div>
+    </div>
+    <button class="btn btn-outline-dark" (click)='switchStreet()'><img [src]='streetButton' width='30px'></button>
+    
+<agm-map id='map' [latitude]="latPlace" [longitude]="lngPlace" [scrollwheel]="true" [zoom]="zoom" style="height: 300px;">
+        <agm-marker [latitude]="latPlace" [longitude]="lngPlace"></agm-marker>
+        <agm-direction *ngIf="dir" [origin]="dir.origin" [destination]="dir.destination" [travelMode]="dir.travelMode" [panel]="panel" [provideRouteAlternatives]='true'></agm-direction>
+</agm-map>
+
+<div #panel ></div>
+    
+</div>
